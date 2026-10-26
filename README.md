@@ -183,8 +183,8 @@ Se organiza en **roles**, uno por servicio:
 <!-- 📷 FOTO 7: navegador en http://IP/info.php -> assets/info-php.png -->
 <!-- 📷 FOTO 8: navegador en http://IP/phpMyAdmin mostrando la base ventas -> assets/phpmyadmin.png -->
 <div align="center">
-  <img src="./assets/info-php.png" width="400" />
-  <img src="./assets/phpmyadmin.png" width="400" />
+  <img src="./assets/phpadmin.png" width="400" />
+  <img src="./assets/lamp1.png" width="400" />
 </div>
 
 ### 📁 Samba funcionando
@@ -198,7 +198,7 @@ Se organiza en **roles**, uno por servicio:
 
 <!-- 📷 FOTO 10: terminal con psql -U postgres -h IP desde otra máquina -> assets/postgresql.png -->
 <div align="center">
-  <img src="./assets/postgresql.png" width="800" />
+  <img src="./assets/postgres.png" width="800" />
 </div>
 
 ---
