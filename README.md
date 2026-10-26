@@ -59,13 +59,13 @@ Grupo 1<br>
 
 <td width="50%">
 <table><tr>
-<td><img src="./assets/integrante3.jpg" width="90"/></td>
+<td><img src="./assets/imagen para aso.jpeg" width="90"/></td>
 <td>
 
-**⚙️ Nombre Apellido**<br>
-Grupo X<br>
-🎓 Codsis: 000000000<br>
-📱 +591 7XXXXXXX
+**⚙️ Areacely Alcon**<br>
+Grupo 1<br>
+🎓 Codsis: 202501435<br>
+📱 +591 75965338
 
 </td>
 </tr></table>
