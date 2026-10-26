@@ -42,13 +42,13 @@ Grupo 1<br>
 
 <td width="50%">
 <table><tr>
-<td><img src="./assets/integrante2.jpg" width="90"/></td>
+<td><img src="./assets/perfil.png" width="90"/></td>
 <td>
 
-**🧑‍🎨 Nombre Apellido**<br>
-Grupo X<br>
-🎓 Codsis: 000000000<br>
-📱 +591 7XXXXXXX
+**🧑‍🎨 Dylan Temprano**<br>
+Grupo 1<br>
+🎓 Codsis: 202201667<br>
+📱 +591 71426919
 
 </td>
 </tr></table>
