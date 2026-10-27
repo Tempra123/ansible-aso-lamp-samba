@@ -120,7 +120,6 @@ Se organiza en **roles**, uno por servicio:
 .
 ├── ansible.cfg              → Configuración y optimización de Ansible
 ├── site.yml                 → Playbook principal
-├── requirements.yml         → Colecciones necesarias (zypper)
 ├── inventory/
 │   └── hosts.ini            → Solo las IP de las máquinas
 ├── group_vars/servidor/
@@ -150,6 +149,11 @@ Se organiza en **roles**, uno por servicio:
 | 🚫 `gather_facts: false` | No recolecta datos innecesarios al iniciar |
 | 📦 `pipelining = True` | Menos pasos por SSH en cada tarea |
 | 🔁 `ControlPersist=60s` | Reutiliza la conexión SSH en vez de abrir una por tarea |
+| 🏃 `strategy: free` | Cada máquina avanza a su ritmo, sin esperar a la más lenta |
+| ⏱️ `timeout = 5` y `ConnectTimeout=5` | Una IP caída falla en 5 segundos y sin reintentos (`ConnectionAttempts=1`) |
+| 🤝 `host_key_checking = False` | No pregunta "¿confías en esta máquina?" al conectar por primera vez |
+| 🧰 Paquetes en una sola tarea | Cada rol instala todos sus paquetes con un solo `zypper` |
+| 🔔 `handlers` (`notify`) | Al copiar un archivo de configuración se avisa al handler que reinicia el servicio |
 
 ---
 
@@ -207,40 +211,50 @@ Se organiza en **roles**, uno por servicio:
 
 ### 📥 1. En la VM 01 (Master)
 
+En la VM 02 solo hace falta `sshd`, `firewalld` y el acceso root.
+
 ```bash
-zypper install ansible sshpass openssh-server-config-rootlogin
-systemctl enable sshd
+zypper install ansible sshpass git unzip openssh-server-config-rootlogin
+systemctl start sshd
+systemctl disable firewalld
 ```
 
 ### 📂 2. Copiar el proyecto a `/etc/ansible` y entrar
 
+Elegir **una** de las dos opciones.
+
+**Opción A — Descargando el ZIP**
+
+En GitHub: botón **Code > Download ZIP** y dejar el archivo en la VM 01.
+
 ```bash
-unzip ansible-aso.zip
-cp -r ansible-aso/* /etc/ansible/
+unzip ansible-aso-lamp-samba-main.zip
+mkdir -p /etc/ansible
+cp -r ansible-aso-lamp-samba-main/. /etc/ansible/
 cd /etc/ansible
 ```
 
-### 📄 3. Copiar las configuraciones reales de la VM 01 a `configuraciones/`
+**Opción B — Con Git**
 
 ```bash
-cp /etc/php8/apache2/php.ini            configuraciones/
-cp /etc/samba/smb.conf                  configuraciones/
-cp /var/lib/pgsql/data/postgresql.conf  configuraciones/
-cp /var/lib/pgsql/data/pg_hba.conf      configuraciones/
+git clone https://github.com/Tempra123/ansible-aso-lamp-samba.git
+mkdir -p /etc/ansible
+cp -r ansible-aso-lamp-samba/. /etc/ansible/
+cd /etc/ansible
 ```
 
-### 🌐 4. Poner las IP de las máquinas
+### 🌐 3. Poner las IP de las máquinas
 
 Editar `inventory/hosts.ini`.
 
-### 🔑 5. Acceso SSH sin contraseña
+### 🔑 4. Acceso SSH sin contraseña
 
 ```bash
 ssh-keygen -t ed25519
 ssh-copy-id root@IP_DE_CADA_MAQUINA
 ```
 
-### 🔐 6. Poner las contraseñas y cifrarlas
+### 🔐 5. Poner las contraseñas y cifrarlas
 
 Editar `group_vars/servidor/vault.yml` y cifrarlo:
 
@@ -249,7 +263,9 @@ vim group_vars/servidor/vault.yml
 ansible-vault encrypt group_vars/servidor/vault.yml
 ```
 
-### ▶️ 7. Ejecutar
+### ▶️ 6. Ejecutar
+
+Siempre desde `/etc/ansible`.
 
 Todo:
 
