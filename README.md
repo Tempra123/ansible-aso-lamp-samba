@@ -198,7 +198,8 @@ Se organiza en **roles**, uno por servicio:
 
 <!-- 📷 FOTO 9: terminal con smbclient -L //IP -U user01 -> assets/samba.png -->
 <div align="center">
-  <img src="./assets/samba.png" width="800" />
+  <img src="./assets/samba.jpeg" width="800" />
+  <img src="./assets/samba1.jpeg" width="800" />
 </div>
 
 ### 🐘 PostgreSQL remoto funcionando
