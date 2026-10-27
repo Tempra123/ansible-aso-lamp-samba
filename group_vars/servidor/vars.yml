@@ -1,0 +1,28 @@
+---
+ansible_user: root
+
+# Archivos que deben estar en /etc/ansible/configuraciones/ (los revisa site.yml)
+archivos_configuracion:
+  - php.ini
+  - smb.conf
+  - postgresql.conf
+  - pg_hba.conf
+  - info.php
+  - prueba.php
+
+# MariaDB / LAMP
+mariadb_root_password: "{{ vault_mariadb_root_password }}"
+mariadb_database: ventas
+
+# Samba
+samba_user: user01
+samba_user_system_password: "{{ vault_user01_password }}"
+samba_user_password: "{{ vault_samba_password }}"
+samba_share_dir: /opt/documentos
+
+# PostgreSQL
+postgres_password: "{{ vault_postgres_password }}"
+postgres_new_user: admin
+postgres_new_user_password: "{{ vault_pg_admin_password }}"
+postgres_new_db: dbtest
+postgres_data_dir: /var/lib/pgsql/data

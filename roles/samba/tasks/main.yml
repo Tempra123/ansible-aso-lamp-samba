@@ -1,0 +1,64 @@
+---
+- name: Instalar Samba
+  community.general.zypper:
+    name: samba
+    state: present
+
+- name: Crear usuario del sistema {{ samba_user }}
+  ansible.builtin.user:
+    name: "{{ samba_user }}"
+    home: "/home/{{ samba_user }}"
+    create_home: true
+  register: usuario_sistema
+
+- name: Poner clave al usuario del sistema (solo cuando se acaba de crear)
+  ansible.builtin.command: chpasswd
+  args:
+    stdin: "{{ samba_user }}:{{ samba_user_system_password }}"
+  when: usuario_sistema.changed
+  no_log: true
+
+- name: Permisos solo para el dueño en /home/{{ samba_user }}
+  ansible.builtin.file:
+    path: "/home/{{ samba_user }}"
+    mode: "0700"
+
+- name: Crear directorio compartido
+  ansible.builtin.file:
+    path: "{{ samba_share_dir }}"
+    state: directory
+    mode: "0777"
+
+- name: Copiar smb.conf a /etc/samba/smb.conf
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/configuraciones/smb.conf"
+    dest: /etc/samba/smb.conf
+    owner: root
+    group: root
+    mode: "0644"
+    backup: true
+  notify: Reiniciar smb
+
+- name: Ver si el usuario Samba ya existe
+  ansible.builtin.shell: "pdbedit -L | grep -q '^{{ samba_user }}:'"
+  register: samba_user_exists
+  changed_when: false
+  failed_when: false
+
+- name: Crear usuario de Samba
+  ansible.builtin.shell: |
+    printf '%s\n%s\n' '{{ samba_user_password }}' '{{ samba_user_password }}' | smbpasswd -a -s {{ samba_user }}
+  when: samba_user_exists.rc != 0
+  no_log: true
+
+- name: Iniciar y habilitar smb
+  ansible.builtin.service:
+    name: smb
+    state: started
+    enabled: true
+
+# Reinicio final para asegurar que Samba use el smb.conf y los usuarios nuevos
+- name: Reiniciar smb al terminar
+  ansible.builtin.service:
+    name: smb
+    state: restarted

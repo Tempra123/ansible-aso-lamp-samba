@@ -1,0 +1,5 @@
+Nombre y apellido, grupo, codsis, celular
+Leonardo Mena, Grupo 1, 202201743, 69588990
+Dylan Alex Temprano, Grupo 1, 202201667, 71426919
+Aracely Alcon Fuentes, Grupo 1, 202501435, 75965338
+Sergio Rodrigo Arancibia, Grupo 1, 201702027, 79757761

@@ -1,0 +1,71 @@
+---
+- name: Instalar Apache, PHP 8, phpMyAdmin y MariaDB
+  community.general.zypper:
+    name:
+      - apache2
+      - php8
+      - apache2-mod_php8
+      - php8-mysql
+      - phpMyAdmin
+      - phpMyAdmin-apache
+      - mariadb
+    state: present
+
+- name: Iniciar y habilitar MariaDB
+  ansible.builtin.service:
+    name: mariadb
+    state: started
+    enabled: true
+
+# Se usa -p porque la primera vez root entra por unix_socket (ignora la clave)
+# y las veces siguientes ya entra con la clave. Asi funciona en los dos casos.
+- name: Poner clave a root de MariaDB
+  ansible.builtin.command: >
+    mariadb -u root -p{{ mariadb_root_password }} -e
+    "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{ mariadb_root_password }}'; FLUSH PRIVILEGES;"
+  changed_when: false
+  no_log: true
+
+- name: Crear base de datos y tabla
+  ansible.builtin.command: >
+    mariadb -u root -p{{ mariadb_root_password }} -e
+    "CREATE DATABASE IF NOT EXISTS {{ mariadb_database }};
+     CREATE TABLE IF NOT EXISTS {{ mariadb_database }}.emp (ci INT, nombre CHAR(80));"
+  changed_when: false
+  no_log: true
+
+- name: Copiar php.ini
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/configuraciones/php.ini"
+    dest: /etc/php8/apache2/php.ini
+    owner: root
+    group: root
+    mode: "0644"
+    backup: true
+  notify: Reiniciar apache2
+
+- name: Copiar info.php y prueba.php
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/configuraciones/{{ item }}"
+    dest: "/srv/www/htdocs/{{ item }}"
+    mode: "0644"
+  loop:
+    - info.php
+    - prueba.php
+
+- name: Iniciar y habilitar Apache
+  ansible.builtin.service:
+    name: apache2
+    state: started
+    enabled: true
+
+# Reinicio final para asegurar que Apache y MariaDB usen la configuracion nueva
+- name: Reiniciar Apache al terminar
+  ansible.builtin.service:
+    name: apache2
+    state: restarted
+
+- name: Reiniciar MariaDB al terminar
+  ansible.builtin.service:
+    name: mariadb
+    state: restarted

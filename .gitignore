@@ -1,0 +1,6 @@
+# Archivo con la clave del vault (si lo creas); nunca se sube a GitHub
+.vault_pass
+# Archivos que Ansible crea cuando una ejecucion falla
+*.retry
+# Copias de respaldo que crea Ansible al cambiar configuraciones (backup: true)
+*~

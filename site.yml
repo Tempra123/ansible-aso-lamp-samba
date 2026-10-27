@@ -1,0 +1,31 @@
+---
+# Ejecutar todo:     ansible-playbook site.yml --ask-vault-pass
+# Solo un rol:       ansible-playbook site.yml --tags postgresql --ask-vault-pass
+- name: Configurar servidores openSUSE 16.0
+  hosts: servidor
+  # OPTIMIZACION: no recolecta datos de las maquinas al iniciar (ahorra tiempo)
+  gather_facts: false
+  # OPTIMIZACION: cada maquina avanza a su propio ritmo, sin esperar a la mas lenta
+  strategy: free
+
+  pre_tasks:
+    # Revisa en el Master que existan tus archivos de configuracion antes de tocar las maquinas
+    - name: Verificar archivos en configuraciones/
+      ansible.builtin.stat:
+        path: "{{ playbook_dir }}/configuraciones/{{ item }}"
+      loop: "{{ archivos_configuracion }}"
+      delegate_to: localhost
+      register: cfg_check
+      tags: [always]
+
+    # Si falta alguno, se detiene y dice cual es
+    - name: Avisar que archivos faltan
+      ansible.builtin.fail:
+        msg: "Falta copiar a configuraciones/: {{ cfg_check.results | rejectattr('stat.exists') | map(attribute='item') | list }}"
+      when: cfg_check.results | rejectattr('stat.exists') | list | length > 0
+      tags: [always]
+
+  roles:
+    - { role: lamp,       tags: [lamp] }
+    - { role: samba,      tags: [samba] }
+    - { role: postgresql, tags: [postgresql] }

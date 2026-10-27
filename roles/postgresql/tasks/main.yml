@@ -1,0 +1,107 @@
+---
+- name: Instalar PostgreSQL y libreria de conexion para PHP
+  community.general.zypper:
+    name:
+      - postgresql-server
+      - postgresql-contrib
+      - php8-pgsql
+      - php8-mbstring
+    state: present
+
+- name: Iniciar y habilitar PostgreSQL
+  ansible.builtin.service:
+    name: postgresql
+    state: started
+    enabled: true
+
+- name: Copiar postgresql.conf
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/configuraciones/postgresql.conf"
+    dest: "{{ postgres_data_dir }}/postgresql.conf"
+    owner: postgres
+    group: postgres
+    mode: "0600"
+    backup: true
+  notify: Reiniciar postgresql
+
+- name: Aplicar postgresql.conf
+  ansible.builtin.meta: flush_handlers
+
+- name: Probar si la clave del usuario postgres ya funciona
+  ansible.builtin.command: psql -U postgres -h localhost -tAc "SELECT 1"
+  environment:
+    PGPASSWORD: "{{ postgres_password }}"
+  register: pg_pw_test
+  changed_when: false
+  failed_when: false
+  no_log: true
+
+- name: Poner clave al usuario postgres (solo si aun no la tiene)
+  ansible.builtin.command: >
+    su -l postgres -c "psql -c \"ALTER USER postgres PASSWORD '{{ postgres_password }}';\""
+  when: pg_pw_test.rc != 0
+  no_log: true
+
+- name: Copiar pg_hba.conf
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/configuraciones/pg_hba.conf"
+    dest: "{{ postgres_data_dir }}/pg_hba.conf"
+    owner: postgres
+    group: postgres
+    mode: "0600"
+    backup: true
+  notify: Reiniciar postgresql
+
+- name: Aplicar pg_hba.conf
+  ansible.builtin.meta: flush_handlers
+
+- name: Ver si existe el usuario {{ postgres_new_user }}
+  ansible.builtin.command: >
+    psql -U postgres -h localhost -tAc
+    "SELECT 1 FROM pg_roles WHERE rolname='{{ postgres_new_user }}'"
+  environment:
+    PGPASSWORD: "{{ postgres_password }}"
+  register: pg_user_exists
+  changed_when: false
+  no_log: true
+
+- name: Crear usuario {{ postgres_new_user }} (superusuario)
+  ansible.builtin.command: >
+    psql -U postgres -h localhost -c
+    "CREATE ROLE {{ postgres_new_user }} SUPERUSER LOGIN PASSWORD '{{ postgres_new_user_password }}';"
+  environment:
+    PGPASSWORD: "{{ postgres_password }}"
+  when: pg_user_exists.stdout | trim != '1'
+  no_log: true
+
+- name: Ver que bases de datos existen
+  ansible.builtin.command: psql -U postgres -h localhost -tAc "SELECT datname FROM pg_database"
+  environment:
+    PGPASSWORD: "{{ postgres_password }}"
+  register: pg_dbs
+  changed_when: false
+  no_log: true
+
+- name: Crear base de datos {{ postgres_new_user }}
+  ansible.builtin.command: >
+    psql -U postgres -h localhost -c
+    "CREATE DATABASE {{ postgres_new_user }} OWNER {{ postgres_new_user }};"
+  environment:
+    PGPASSWORD: "{{ postgres_password }}"
+  when: postgres_new_user not in pg_dbs.stdout_lines
+  no_log: true
+
+- name: Crear base de datos {{ postgres_new_db }}
+  ansible.builtin.command: >
+    psql -U postgres -h localhost -c
+    "CREATE DATABASE {{ postgres_new_db }};"
+  environment:
+    PGPASSWORD: "{{ postgres_password }}"
+  when: postgres_new_db not in pg_dbs.stdout_lines
+  no_log: true
+
+# Reinicio final para asegurar que PostgreSQL use postgresql.conf y pg_hba.conf
+- name: Reiniciar PostgreSQL al terminar
+  ansible.builtin.service:
+    name: postgresql
+    state: restarted
