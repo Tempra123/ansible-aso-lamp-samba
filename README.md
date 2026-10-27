@@ -22,90 +22,102 @@
 
 </div>
 
-<h2 align="center">👥 Equipo de Trabajo</h2>
+## 👥 Equipo de Trabajo
 
 <!-- 📷 FOTOS 2, 3, 4, 5: una foto por integrante -> assets/leonardo.jpeg, integrante2.jpg, integrante3.jpg, integrante4.jpg -->
 
-<div align="center">
 <table>
 <tr>
 
-<td align="center" valign="top" width="50%">
-<img src="./assets/leonardo.jpeg" width="120"/><br>
-<b>🧑‍💻 Leonardo Mena</b><br>
+<td width="50%" valign="middle">
+<table><tr>
+<td align="center" valign="middle"><img src="./assets/leonardo.jpeg" width="90"/></td>
+<td valign="middle">
+
+**🧑‍💻 Leonardo Mena**<br>
 Grupo 1<br>
 🎓 Codsis: 202201743<br>
 📱 +591 69588990
+
+</td>
+</tr></table>
 </td>
 
-<td align="center" valign="top" width="50%">
-<img src="./assets/perfil.png" width="120"/><br>
-<b>🧑‍🎨 Dylan Temprano</b><br>
+<td width="50%" valign="middle">
+<table><tr>
+<td align="center" valign="middle"><img src="./assets/perfil.png" width="90"/></td>
+<td valign="middle">
+
+**🧑‍🎨 Dylan Temprano**<br>
 Grupo 1<br>
 🎓 Codsis: 202201667<br>
 📱 +591 71426919
+
+</td>
+</tr></table>
 </td>
 
 </tr>
 <tr>
 
-<td align="center" valign="top" width="50%">
-<img src="./assets/imagen%20para%20aso.jpeg" width="120"/><br>
-<b>⚙️ Areacely Alcon</b><br>
+<td width="50%" valign="middle">
+<table><tr>
+<td align="center" valign="middle"><img src="./assets/imagen%20para%20aso.jpeg" width="90"/></td>
+<td valign="middle">
+
+**⚙️ Areacely Alcon**<br>
 Grupo 1<br>
 🎓 Codsis: 202501435<br>
 📱 +591 75965338
+
+</td>
+</tr></table>
 </td>
 
-<td align="center" valign="top" width="50%">
-<img src="./assets/integrante4.jpg" width="120"/><br>
-<b>🧩 Nombre Apellido</b><br>
+<td width="50%" valign="middle">
+<table><tr>
+<td align="center" valign="middle"><img src="./assets/integrante4.jpg" width="90"/></td>
+<td valign="middle">
+
+**🧩 Nombre Apellido**<br>
 Grupo X<br>
 🎓 Codsis: 000000000<br>
 📱 +591 7XXXXXXX
+
+</td>
+</tr></table>
 </td>
 
 </tr>
 </table>
-</div>
 
 ---
 
-<h2 align="center">📖 Descripción del Proyecto</h2>
+## 📖 Descripción del Proyecto
 
-<p align="center">
-Proyecto de <b>Ansible</b> que configura de forma remota, desde una máquina Master (VM 01),<br>
-las demás máquinas virtuales con <b>openSUSE 16.0</b>.<br><br>
-Se organiza en <b>roles</b>, uno por servicio:
-</p>
+Proyecto de **Ansible** que configura de forma remota, desde una máquina Master (VM 01), las demás máquinas virtuales con **openSUSE 16.0**.
 
-<div align="center">
+Se organiza en **roles**, uno por servicio:
 
 | Rol | Qué configura |
-|:---:|:---:|
+|---|---|
 | 🌐 `lamp` | Apache, PHP 8, phpMyAdmin y MariaDB (clave de root, base `ventas`, tabla `emp`) |
 | 📁 `samba` | Usuario del sistema, usuario de Samba, directorio compartido y `create mask` |
 | 🐘 `postgresql` | PostgreSQL, `php8-pgsql`, clave de `postgres`, usuario nuevo, conexiones remotas y clave cifrada |
 
-</div>
-
 ---
 
-<h2 align="center">✅ Tareas cubiertas</h2>
-
-<div align="center">
+## ✅ Tareas cubiertas
 
 | Tarea | Descripción | Dónde está |
-|:---:|:---:|:---:|
+|---|---|---|
 | **Tarea 3** | LAMP y Samba con roles, inventario sin contraseñas y optimización | `roles/lamp`, `roles/samba`, `ansible.cfg`, `group_vars/` |
 | **Tarea 4** | Scripts y archivos de configuración en GitHub | Este repositorio |
 | **Tarea 5** | Rol de PostgreSQL | `roles/postgresql` |
 
-</div>
-
 ---
 
-<h2 align="center">🧱 Estructura del Proyecto</h2>
+## 🧱 Estructura del Proyecto
 
 ```text
 .
@@ -131,12 +143,10 @@ Se organiza en <b>roles</b>, uno por servicio:
 
 ---
 
-<h2 align="center">⚡ Optimización</h2>
-
-<div align="center">
+## ⚡ Optimización
 
 | Cambio | Para qué sirve |
-|:---:|:---:|
+|---|---|
 | 🔐 `ansible-vault` | Las contraseñas no quedan a la vista en el inventario |
 | 🧑‍🤝‍🧑 `forks = 10` | Trabaja con 10 máquinas a la vez |
 | 🚫 `gather_facts: false` | No recolecta datos innecesarios al iniciar |
@@ -148,11 +158,9 @@ Se organiza en <b>roles</b>, uno por servicio:
 | 🧰 Paquetes en una sola tarea | Cada rol instala todos sus paquetes con un solo `zypper` |
 | 🔔 `handlers` (`notify`) | Al copiar un archivo de configuración se avisa al handler que reinicia el servicio |
 
-</div>
-
 ---
 
-<h2 align="center">🛠️ Tecnologías Utilizadas</h2>
+## 🛠️ Tecnologías Utilizadas
 
 <div align="center">
 
@@ -166,47 +174,47 @@ Se organiza en <b>roles</b>, uno por servicio:
 
 ---
 
-<h2 align="center">🖼️ Vista previa</h2>
+## 🖼️ Vista previa
 
 <!-- 📷 FOTOS 6 a 10: capturas de pantalla del proyecto funcionando -> carpeta assets/ -->
 
-<h3 align="center">▶️ Ejecución del playbook</h3>
+### ▶️ Ejecución del playbook
 
 <!-- 📷 FOTO 6: terminal con el resultado final (PLAY RECAP con failed=0) -> assets/playbook.png -->
 <div align="center">
-  <img src="./assets/playbook.png" width="90%" />
+  <img src="./assets/playbook.png" width="800" />
 </div>
 
-<h3 align="center">🌐 LAMP funcionando</h3>
+### 🌐 LAMP funcionando
 
 <!-- 📷 FOTO 7: navegador en http://IP/info.php -> assets/info-php.png -->
 <!-- 📷 FOTO 8: navegador en http://IP/phpMyAdmin mostrando la base ventas -> assets/phpmyadmin.png -->
 <div align="center">
-  <img src="./assets/phpadmin.png" width="45%" />
-  <img src="./assets/lamp1.png" width="45%" />
+  <img src="./assets/phpadmin.png" width="400" />
+  <img src="./assets/lamp1.png" width="400" />
 </div>
 
-<h3 align="center">📁 Samba funcionando</h3>
+### 📁 Samba funcionando
 
 <!-- 📷 FOTO 9: terminal con smbclient -L //IP -U user01 -> assets/samba.png -->
 <div align="center">
-  <img src="./assets/samba.png" width="90%" />
+  <img src="./assets/samba.png" width="800" />
 </div>
 
-<h3 align="center">🐘 PostgreSQL remoto funcionando</h3>
+### 🐘 PostgreSQL remoto funcionando
 
 <!-- 📷 FOTO 10: terminal con psql -U postgres -h IP desde otra máquina -> assets/postgresql.png -->
 <div align="center">
-  <img src="./assets/postgres.png" width="90%" />
+  <img src="./assets/postgres.png" width="800" />
 </div>
 
 ---
 
-<h2 align="center">🚀 Cómo ejecutar el proyecto</h2>
+## 🚀 Cómo ejecutar el proyecto
 
-<h3 align="center">📥 1. En la VM 01 (Master)</h3>
+### 📥 1. En la VM 01 (Master)
 
-<p align="center">En la VM 02 solo hace falta <code>sshd</code>, <code>firewalld</code> y el acceso root.</p>
+En la VM 02 solo hace falta `sshd`, `firewalld` y el acceso root.
 
 ```bash
 zypper install ansible sshpass git unzip openssh-server-config-rootlogin
@@ -214,13 +222,13 @@ systemctl start sshd
 systemctl disable firewalld
 ```
 
-<h3 align="center">📂 2. Copiar el proyecto a <code>/etc/ansible</code> y entrar</h3>
+### 📂 2. Copiar el proyecto a `/etc/ansible` y entrar
 
-<p align="center">Elegir <b>una</b> de las dos opciones.</p>
+Elegir **una** de las dos opciones.
 
-<h4 align="center">📦 Opción A — Descargando el ZIP</h4>
+#### 📦 Opción A — Descargando el ZIP
 
-<p align="center">En GitHub: botón <b>Code &gt; Download ZIP</b> y dejar el archivo en la VM 01.</p>
+En GitHub: botón **Code > Download ZIP** y dejar el archivo en la VM 01.
 
 ```bash
 unzip ansible-aso-lamp-samba-main.zip
@@ -229,7 +237,7 @@ cp -r ansible-aso-lamp-samba-main/. /etc/ansible/
 cd /etc/ansible
 ```
 
-<h4 align="center">🐙 Opción B — Con Git</h4>
+#### 🐙 Opción B — Con Git
 
 ```bash
 git clone https://github.com/Tempra123/ansible-aso-lamp-samba.git
@@ -238,37 +246,37 @@ cp -r ansible-aso-lamp-samba/. /etc/ansible/
 cd /etc/ansible
 ```
 
-<h3 align="center">🌐 3. Poner las IP de las máquinas</h3>
+### 🌐 3. Poner las IP de las máquinas
 
-<p align="center">Editar <code>inventory/hosts.ini</code></p>
+Editar `inventory/hosts.ini`.
 
-<h3 align="center">🔑 4. Acceso SSH sin contraseña</h3>
+### 🔑 4. Acceso SSH sin contraseña
 
 ```bash
 ssh-keygen -t ed25519
 ssh-copy-id root@IP_DE_CADA_MAQUINA
 ```
 
-<h3 align="center">🔐 5. Poner las contraseñas y cifrarlas</h3>
+### 🔐 5. Poner las contraseñas y cifrarlas
 
-<p align="center">Editar <code>group_vars/servidor/vault.yml</code> y cifrarlo:</p>
+Editar `group_vars/servidor/vault.yml` y cifrarlo:
 
 ```bash
 vim group_vars/servidor/vault.yml
 ansible-vault encrypt group_vars/servidor/vault.yml
 ```
 
-<h3 align="center">▶️ 6. Ejecutar</h3>
+### ▶️ 6. Ejecutar
 
-<p align="center">Siempre desde <code>/etc/ansible</code></p>
+Siempre desde `/etc/ansible`.
 
-<p align="center"><b>Todo:</b></p>
+Todo:
 
 ```bash
 ansible-playbook site.yml --ask-vault-pass
 ```
 
-<p align="center"><b>Solo un rol:</b></p>
+Solo un rol:
 
 ```bash
 ansible-playbook site.yml --tags lamp --ask-vault-pass
