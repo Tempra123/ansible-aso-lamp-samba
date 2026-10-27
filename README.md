@@ -76,13 +76,13 @@ Grupo 1<br>
 
 <td width="50%" valign="middle">
 <table><tr>
-<td align="center" valign="middle"><img src="./assets/integrante4.jpg" width="90"/></td>
+<td align="center" valign="middle"><img src="./assets/Sergio_Arancibia.jpg" width="90"/></td>
 <td valign="middle">
 
-**🧩 Nombre Apellido**<br>
-Grupo X<br>
-🎓 Codsis: 000000000<br>
-📱 +591 7XXXXXXX
+**🧩 Sergio Arancibia**<br>
+Grupo 1<br>
+🎓 Codsis: 201702027<br>
+📱 +591 79757761
 
 </td>
 </tr></table>
