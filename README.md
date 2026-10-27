@@ -12,9 +12,6 @@
   <img src="https://img.shields.io/badge/Ansible-Automation-EE0000?style=for-the-badge&logo=ansible"/>
   <img src="https://img.shields.io/badge/openSUSE-16.0-73BA25?style=for-the-badge&logo=opensuse"/>
   <img src="https://img.shields.io/badge/Apache-PHP_8-D22128?style=for-the-badge&logo=apache"/>
-</p>
-
-<p>
   <img src="https://img.shields.io/badge/MariaDB-Database-003545?style=for-the-badge&logo=mariadb"/>
   <img src="https://img.shields.io/badge/PostgreSQL-Remote-4169E1?style=for-the-badge&logo=postgresql&logoColor=white"/>
   <img src="https://img.shields.io/badge/Samba-Shares-1E90FF?style=for-the-badge"/>
@@ -29,10 +26,10 @@
 <table>
 <tr>
 
-<td width="50%" valign="middle">
+<td width="50%">
 <table><tr>
-<td align="center" valign="middle"><img src="./assets/leonardo.jpeg" width="90"/></td>
-<td valign="middle">
+<td><img src="./assets/leonardo.jpeg" width="90"/></td>
+<td>
 
 **🧑‍💻 Leonardo Mena**<br>
 Grupo 1<br>
@@ -43,10 +40,10 @@ Grupo 1<br>
 </tr></table>
 </td>
 
-<td width="50%" valign="middle">
+<td width="50%">
 <table><tr>
-<td align="center" valign="middle"><img src="./assets/perfil.png" width="90"/></td>
-<td valign="middle">
+<td><img src="./assets/perfil.png" width="90"/></td>
+<td>
 
 **🧑‍🎨 Dylan Temprano**<br>
 Grupo 1<br>
@@ -60,10 +57,10 @@ Grupo 1<br>
 </tr>
 <tr>
 
-<td width="50%" valign="middle">
+<td width="50%">
 <table><tr>
-<td align="center" valign="middle"><img src="./assets/imagen%20para%20aso.jpeg" width="90"/></td>
-<td valign="middle">
+<td><img src="./assets/imagen para aso.jpeg" width="90"/></td>
+<td>
 
 **⚙️ Areacely Alcon**<br>
 Grupo 1<br>
@@ -74,10 +71,10 @@ Grupo 1<br>
 </tr></table>
 </td>
 
-<td width="50%" valign="middle">
+<td width="50%">
 <table><tr>
-<td align="center" valign="middle"><img src="./assets/integrante4.jpg" width="90"/></td>
-<td valign="middle">
+<td><img src="./assets/integrante4.jpg" width="90"/></td>
+<td>
 
 **🧩 Nombre Apellido**<br>
 Grupo X<br>
@@ -181,7 +178,6 @@ Se organiza en **roles**, uno por servicio:
 ### ▶️ Ejecución del playbook
 
 <!-- 📷 FOTO 6: terminal con el resultado final (PLAY RECAP con failed=0) -> assets/playbook.png -->
-
 <div align="center">
   <img src="./assets/playbook.png" width="800" />
 </div>
@@ -190,7 +186,6 @@ Se organiza en **roles**, uno por servicio:
 
 <!-- 📷 FOTO 7: navegador en http://IP/info.php -> assets/info-php.png -->
 <!-- 📷 FOTO 8: navegador en http://IP/phpMyAdmin mostrando la base ventas -> assets/phpmyadmin.png -->
-
 <div align="center">
   <img src="./assets/phpadmin.png" width="400" />
   <img src="./assets/lamp1.png" width="400" />
@@ -199,7 +194,6 @@ Se organiza en **roles**, uno por servicio:
 ### 📁 Samba funcionando
 
 <!-- 📷 FOTO 9: terminal con smbclient -L //IP -U user01 -> assets/samba.png -->
-
 <div align="center">
   <img src="./assets/samba.png" width="800" />
 </div>
@@ -207,7 +201,6 @@ Se organiza en **roles**, uno por servicio:
 ### 🐘 PostgreSQL remoto funcionando
 
 <!-- 📷 FOTO 10: terminal con psql -U postgres -h IP desde otra máquina -> assets/postgresql.png -->
-
 <div align="center">
   <img src="./assets/postgres.png" width="800" />
 </div>
@@ -230,7 +223,7 @@ systemctl disable firewalld
 
 Elegir **una** de las dos opciones.
 
-#### 📦 Opción A — Descargando el ZIP
+**Opción A — Descargando el ZIP**
 
 En GitHub: botón **Code > Download ZIP** y dejar el archivo en la VM 01.
 
@@ -241,7 +234,7 @@ cp -r ansible-aso-lamp-samba-main/. /etc/ansible/
 cd /etc/ansible
 ```
 
-#### 🐙 Opción B — Con Git
+**Opción B — Con Git**
 
 ```bash
 git clone https://github.com/Tempra123/ansible-aso-lamp-samba.git
